@@ -23,20 +23,24 @@ static UIViewController *FBTopViewController(UIViewController *controller) {
 
 static UIWindow *FBKeyWindow(void) {
     UIApplication *application = UIApplication.sharedApplication;
-    UIWindow *keyWindow = nil;
+    if (application.applicationState != UIApplicationStateActive) {
+        return nil;
+    }
 
-    for (UIWindow *window in application.windows) {
-        if (window.isKeyWindow) {
-            keyWindow = window;
-            break;
+    for (UIScene *scene in application.connectedScenes) {
+        if (scene.activationState != UISceneActivationStateForegroundActive ||
+            ![scene isKindOfClass:[UIWindowScene class]]) {
+            continue;
+        }
+
+        for (UIWindow *window in ((UIWindowScene *)scene).windows) {
+            if (window.isKeyWindow && !window.hidden) {
+                return window;
+            }
         }
     }
 
-    if (!keyWindow) {
-        keyWindow = application.windows.firstObject;
-    }
-
-    return keyWindow;
+    return nil;
 }
 
 @implementation FBBackController
