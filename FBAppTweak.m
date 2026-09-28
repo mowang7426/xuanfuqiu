@@ -4,7 +4,7 @@
 
 static int FBNotificationToken = 0;
 
-%ctor {
+__attribute__((constructor)) static void FBInitializeAppTweak(void) {
     NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier;
     if ([bundleIdentifier isEqualToString:@"com.apple.springboard"] ||
         !NSClassFromString(@"UIApplication")) {
