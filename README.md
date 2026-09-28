@@ -14,7 +14,18 @@ The return controller handles these UIKit cases:
 
 ## Build
 
-Install Theos and the required roothide developer environment first.
+### Local environment
+
+Run the setup script on a macOS or Linux development machine. The script installs the roothide-compatible Theos toolchain into `~/theos` by default and prints the required `THEOS` export.
+
+```bash
+bash scripts/setup-theos.sh
+export THEOS="$HOME/theos"
+```
+
+The local machine also needs an Objective-C toolchain, `make`, `perl`, `curl`, `git`, and `ldid`. On Debian or Ubuntu, install those packages with the system package manager.
+
+### Local packages
 
 ```bash
 # Build the rootless package
@@ -25,6 +36,10 @@ make clean package THEOS_PACKAGE_SCHEME=roothide
 ```
 
 The generated packages are written to `packages/`.
+
+### GitHub Actions
+
+Every push to `master`, pull request, or manual workflow run executes `.github/workflows/build.yml`. The workflow installs the roothide Theos environment, builds both package schemes, and uploads `FloatBack-debs` as an Actions artifact.
 
 ## Device verification
 
