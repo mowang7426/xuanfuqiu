@@ -23,7 +23,7 @@ bash scripts/setup-theos.sh
 export THEOS="$HOME/theos"
 ```
 
-The local machine also needs an Objective-C toolchain, `make`, `perl`, `curl`, `git`, and `ldid`. On Debian or Ubuntu, install those packages with the system package manager.
+The local machine also needs an Objective-C toolchain, `make`, `perl`, `curl`, and `git`. The roothide Theos installer supplies the signing tool used by the package build; `ldid` is not installed through the standard Ubuntu package repository.
 
 ### Local packages
 

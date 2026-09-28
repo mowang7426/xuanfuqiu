@@ -17,7 +17,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y clang make perl ldid git curl xz-utils
+          sudo apt-get install -y clang make perl git curl xz-utils
 
       - name: Install roothide Theos
         env:
@@ -25,6 +25,13 @@ jobs:
         run: |
           bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)" -- "$THEOS"
           echo "THEOS=$THEOS" >> "$GITHUB_ENV"
+
+      - name: Verify Theos tools
+        run: |
+          test -f "$THEOS/makefiles/common.mk"
+          test -x "$THEOS/bin/ldid" || test -x "$THEOS/bin/ldid2"
+          make --version
+          clang --version
 
       - name: Build rootless package
         run: |
