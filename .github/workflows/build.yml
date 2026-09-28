@@ -10,8 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      THEOS: ${{ runner.temp }}/theos
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -23,7 +21,7 @@ jobs:
 
       - name: Install roothide Theos
         run: |
-          export THEOS="$THEOS"
+          export THEOS="$RUNNER_TEMP/theos"
           bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)"
           echo "THEOS=$THEOS" >> "$GITHUB_ENV"
 
