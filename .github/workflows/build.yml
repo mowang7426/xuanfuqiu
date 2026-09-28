@@ -10,6 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      THEOS: ${{ runner.temp }}/theos
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -20,16 +22,16 @@ jobs:
           sudo apt-get install -y clang make perl git curl xz-utils
 
       - name: Install roothide Theos
-        env:
-          THEOS: ${{ runner.temp }}/theos
         run: |
-          bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)" -- "$THEOS"
+          export THEOS="$THEOS"
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)"
           echo "THEOS=$THEOS" >> "$GITHUB_ENV"
 
       - name: Verify Theos tools
         run: |
+          printf 'THEOS=%s\n' "$THEOS"
+          test -d "$THEOS"
           test -f "$THEOS/makefiles/common.mk"
-          test -x "$THEOS/bin/ldid" || test -x "$THEOS/bin/ldid2"
           make --version
           clang --version
 

@@ -17,7 +17,8 @@ if [ -d "$THEOS_DIR" ]; then
     printf 'Theos directory already exists: %s\n' "$THEOS_DIR"
 else
     printf 'Installing roothide Theos into %s\n' "$THEOS_DIR"
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)" -- "$THEOS_DIR"
+    export THEOS="$THEOS_DIR"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)"
 fi
 
 printf '\nExport this path before building:\n'
