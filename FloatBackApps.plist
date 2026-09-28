@@ -1,0 +1,4 @@
+{
+    // This component listens in application processes. The constructor exits
+    // immediately for processes without UIApplication.
+}

@@ -1,0 +1,8 @@
+Package: com.example.floatback
+Name: FloatBack
+Version: 0.1.0
+Architecture: iphoneos-arm64
+Description: Use a single AssistiveTouch tap to return to the previous page.
+Maintainer: FloatBack
+Author: FloatBack
+Section: Tweaks
