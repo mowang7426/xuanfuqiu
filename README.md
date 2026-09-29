@@ -56,3 +56,13 @@ The AssistiveTouch hook must be verified separately on each supported major iOS 
 When Bottom-x is injected into the current application, `FBBottomXBridge` can send its observed request notification (`com.hometapback.hometap`) and wait briefly for its result notification. If Bottom-x is absent or does not acknowledge the request, FloatBack falls back to its own UIKit `dismiss` / `pop` logic.
 
 This bridge does not reproduce Bottom-x's private tap transaction protocol. Its tap identifier and result payload are private, so it remains conservative until the SpringBoard single-tap source is connected.
+
+## Device runtime probe
+
+The SpringBoard component currently performs a delayed, read-only runtime probe. After SpringBoard has started, it writes candidate Accessibility and AssistiveTouch class names to:
+
+```text
+/var/mobile/Library/Logs/FloatBack-runtime.log
+```
+
+The probe does not hook or alter any method. The class list is needed to identify the iOS 17.0 AssistiveTouch single-tap selector safely.
