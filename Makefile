@@ -10,7 +10,7 @@ FloatBackSpringBoard_CFLAGS = -fobjc-arc
 FloatBackSpringBoard_FRAMEWORKS = UIKit
 FloatBackSpringBoard_PRIVATE_FRAMEWORKS = SpringBoardServices
 
-FloatBackApps_FILES = FBAppTweak.m FBBackController.m
+FloatBackApps_FILES = FBAppTweak.m FBBackController.m FBBottomXBridge.m
 FloatBackApps_CFLAGS = -fobjc-arc
 FloatBackApps_FRAMEWORKS = UIKit
 

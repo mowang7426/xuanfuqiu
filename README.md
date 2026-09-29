@@ -50,3 +50,9 @@ Install one package on the test device, run `sbreload`, and inspect the device l
 ```
 
 The AssistiveTouch hook must be verified separately on each supported major iOS version because its private implementation can change between iOS releases. The app component currently receives the Darwin notification and applies UIKit back behavior; the notification emitter becomes active after the target AssistiveTouch single-tap selector is confirmed.
+
+## Optional Bottom-x compatibility
+
+When Bottom-x is injected into the current application, `FBBottomXBridge` can send its observed request notification (`com.hometapback.hometap`) and wait briefly for its result notification. If Bottom-x is absent or does not acknowledge the request, FloatBack falls back to its own UIKit `dismiss` / `pop` logic.
+
+This bridge does not reproduce Bottom-x's private tap transaction protocol. Its tap identifier and result payload are private, so it remains conservative until the SpringBoard single-tap source is connected.
